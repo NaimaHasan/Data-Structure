@@ -56,6 +56,13 @@ struct linkedList
 	void deleteLast()
 	{
 		if(!head) return;
+
+		if(!head->next)
+		{
+			head = NULL;
+			return;
+		}
+
 		node *cur;
 
 		for(cur=head;cur->next->next!=NULL;cur=cur->next);
@@ -115,6 +122,12 @@ struct linkedList
 
 	void insertAfterNode(node *cur, int data)
 	{
+		if(!head)
+		{
+			insertFirst(data);
+			return;
+		}
+
 		node *tmp = new node(data, cur->next);
 		//tmp->next = cur->next;
 		cur->next = tmp;
@@ -155,11 +168,17 @@ struct linkedList
 	}
 
 	/*void insertLast(int data){
-		if(!head) insertFirst(data);
+		if(!head)
+		{
+			insertFirst(data);
+			return;
+		}
+
 		node *cur;
 		for(cur = head; cur->next != NULL; cur = cur->next);
 		insertAfterNode(cur, data);
 	}*/
+	
 	void insertFirst(int data)
 	{
 		node *tmp = new node(data, head);
@@ -180,8 +199,6 @@ struct linkedList
 		for(cur=head;cur->next!=NULL;cur=cur->next);
 		tmp = new node(data, NULL);
 		cur->next=tmp;
-		
-
 	}
 	
 
