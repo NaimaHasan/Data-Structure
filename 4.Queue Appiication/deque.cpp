@@ -18,12 +18,12 @@ int main()
 	for(i=0;i<n;i++)
 	{
 		while(a[q.back()<=a[i]])
-		q.pop_back();
-			q.push_back(i);
+			q.pop_back();
+		q.push_back(i);
 		
 		while(q.front() + k < i)
-		q.pop_front();
-			printf("%d\n", a[q.front()]);
+			q.pop_front();
+		printf("%d\n", a[q.front()]);
 		
 	}
 }
