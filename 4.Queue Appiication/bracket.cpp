@@ -17,7 +17,11 @@ int main()
 			flag = true;
 			st.pop();
 		} 
-		else flag = false;
+		else 
+		{
+			flag = false;
+			break;
+		}
 	}
 
 	if(flag) printf("Brackets are balanced\n");
