@@ -1,6 +1,15 @@
-//Blazing fast
 #include<bits/stdc++.h>
 using namespace std;
+
+void print_q(queue<int> x){
+	for(int i = 0; i < x.size(); i++)
+	{
+		printf("%d ", x.front());
+		x.push(x.front());
+		x.pop();
+	}
+	printf("\n");
+}
 
 int main()
 {
@@ -21,7 +30,7 @@ int main()
 		}
 		if(cnt)
 		{
-			printf("%d %d\n",i,cnt);
+			// printf("%d %d\n",i,cnt);
 			for(int j = i; cnt > 0; cnt--, j*=i)
 			{
 				for(int k = 0; k < q.size(); k++)
@@ -31,36 +40,35 @@ int main()
 					q.pop();
 				}
 			}
-			for(i = 0; i < p.size(); i++)
-			{
-				printf("%d ", p.front());
-				p.push(p.front());
-					p.pop();
-			}
-			printf("\n");
-			for(int j = 0; j < p.size(); j++)
+
+			while(!p.empty())
 			{
 				q.push(p.front());
 				p.pop();
 			}
-			for(i = 0; i < q.size(); i++)
-			{
-				printf("%d ", q.front());
-				q.push(q.front());
-					q.pop();
-			}
-			printf("\n");
-			//sq = sqrt(n);
+			// sq = ceil(sqrt(n)) + 1;
 		}
 	}
+
 	if(n > 1)
 	{
-		q.push(n);
+		for(int k = 0; k < q.size(); k++)
+		{
+			p.push(q.front() * n);
+			q.push(q.front());
+			q.pop();
+		}
+
+		while(!p.empty())
+		{
+			q.push(p.front());
+			p.pop();
+		}
 	}
-	// for(i = 0; i < q.size(); i++)
-	// {
-	// 	printf("%d ", q.front());
-	// 	q.pop();
-	// }
+
+	sort(q);
+
+	print_q(q);
+
 	return 0;
 }
