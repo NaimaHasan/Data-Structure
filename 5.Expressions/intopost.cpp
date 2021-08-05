@@ -17,6 +17,7 @@ void infixToPostfix(string s)
  
     stack<char> st; 
     string result;
+    s = '(' + s + ')';
  
     for(int i = 0; i < s.length(); i++) 
     {
@@ -39,7 +40,7 @@ void infixToPostfix(string s)
  
         else 
         {
-            while(!st.empty()&&prec(s[i])<=prec(st.top())) 
+            while(!st.empty() && prec(c) <= prec(st.top())) 
             {
                 result+=st.top();
                 st.pop(); 
@@ -47,14 +48,7 @@ void infixToPostfix(string s)
             st.push(c);
         }
     }
- 
-    while(!st.empty()) 
-    {
-        result += st.top();
-        st.pop();
-    }
- 
-    cout<<result<<endl;
+    printf("%s\n", result.c_str());
 }
  
 

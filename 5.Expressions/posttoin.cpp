@@ -3,16 +3,14 @@ using namespace std;
  
 bool isOperand(char x)
 {
-   return (x>='a'&& x<='z') ||
-          (x>='A'&& x<='Z') ||
-          (x>='0'&& x<='9');
+    return (x>='a'&& x<='z') || (x>='A'&& x<='Z') || (x>='0'&& x<='9');
 }
 
-string getInfix(string exp)
+string postfixToInfix(string exp)
 {
     stack<string> s;
  
-    for (int i=0;exp[i]; i++)
+    for (int i = 0; exp[i]; i++)
     {
         
         if (isOperand(exp[i]))
@@ -27,8 +25,8 @@ string getInfix(string exp)
             s.pop();
             string op2 = s.top();
             s.pop();
-            s.push("(" + op2 + exp[i] +
-                   op1 + ")");
+
+            s.push("(" + op2 + exp[i] + op1 + ")");
         }
     }
  
@@ -38,6 +36,7 @@ string getInfix(string exp)
 int main()
 {
     string exp = "ab*c+";
-    cout << getInfix(exp) << endl;
+
+    printf("%s\n", postfixToInfix(exp).c_str());
     return 0;
 }

@@ -1,5 +1,4 @@
-#include <iostream>
-#include <stack>
+#include <bits/stdc++.h>
 using namespace std;
 
 bool isOperator(char c)
@@ -8,7 +7,7 @@ bool isOperator(char c)
 }
  
 
-string preToPost(string exp)
+string prefixToPostfix(string exp)
 {
  
     stack<string> s;
@@ -24,19 +23,19 @@ string preToPost(string exp)
             s.pop();
  
             string temp = op1 + op2 + exp[i];
- 
             s.push(temp);
         }
  
-        else
-            s.push(string(1,exp[i]));
+        else s.push(string(1,exp[i]));
     }
+
     return s.top();
 }
 
 int main()
 {
-    string pre_exp = "*-A/BC-/AKL";
-    cout << preToPost(pre_exp) << endl;
+    string exp = "*-A/BC-/AKL";
+
+    printf("%s\n", prefixToPostfix(exp).c_str());
     return 0;
 }

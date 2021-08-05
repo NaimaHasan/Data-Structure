@@ -1,6 +1,6 @@
-#include <bits/stdc++.h>
+#include<bits/stdc++.h>
 using namespace std;
-
+ 
 int prec(char c) 
 {
     if(c=='^') return 3;
@@ -50,36 +50,59 @@ string infixToPostfix(string s)
     }
     return result;
 }
- 
-string infixToPrefix(string infix)
+
+string ineval(string post)
 {
-    reverse(infix.begin(), infix.end());
- 
-    for (int i=0;infix[i];i++) 
-    {
-        if (infix[i] == '(') 
-        {
-            infix[i] = ')';
-            i++;
-        }
-        else if (infix[i] == ')') 
-        {
-            infix[i] = '(';
-            i++;
-        }
-    }
- 
-    string prefix = infixToPostfix(infix);
+	stack<string> opStack, opeStack;
 
-    reverse(prefix.begin(), prefix.end());
+	for(i = 0; post[i]; i++)
+	{
+		if(!isOperator(post[i])) opStack.push(post[i] - '0');
+		else opeStack.push(post[i]);
+	}
 
-    return prefix;
+	while(!opeStack.empty())
+	{
+		int x, y;
+
+		x = opStack.top();
+		opStack.pop();
+		y = opStack.top();
+		opStack.pop();
+
+		if(opeStack.top() == '+')
+		{
+			opStack.push(x+y);
+			opeStack.pop();
+		}
+		else if(opeStack.top() == '-')
+		{
+			opStack.push(x-y);
+			opeStack.pop();
+		}
+		else if(opeStack.top() == '*')
+		{
+			opStack.push(x*y);
+			opeStack.pop();
+		}
+		else if(opeStack.top() == '/')
+		{
+			opStack.push(x/y);
+			opeStack.pop();
+		}
+	}
+
+	return opStack.top();
 }
 
-int main()
-{
-    string s = ("x+y*z/w+u");
+ 
 
-    printf("%s\n", infixToPrefix(s).c_str());
+int main() 
+{
+    string exp = "1+2*(3^4-5)^(4+3*2)-i";
+    string post = infixToPostfix(exp);
+    ineval(post);
     return 0;
 }
+
+
