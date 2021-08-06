@@ -66,6 +66,7 @@ int main()
 {
     int preOrder[1000],n;
     
+    scanf("%d",&n);
     for(int i=0; i<n; i++) scanf("%d", &preOrder[i]);
 
     node *root = createBST(preOrder, 0, n-1);
