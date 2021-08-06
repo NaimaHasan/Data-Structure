@@ -12,6 +12,29 @@ int prec(char c)
     else return -1;
 }
 
+bool isOperator(char ch){
+    return (ch == '(' || ch == ')' || ch == '+' || ch == '-' || ch == '*' || ch == '/' || ch == '^');
+}
+
+void traverse_stack(stack<int> & st) {
+    if(st.empty())
+        return;
+    int x = st.top();
+    printf("%d ", x);
+    st.pop();
+    traverse_stack(st);
+    st.push(x);
+}
+void traverse_stackx(stack<int> & st) {
+    if(st.empty())
+        return;
+    int x = st.top();
+    printf("%c ", x);
+    st.pop();
+    traverse_stackx(st);
+    st.push(x);
+}
+
 string infixToPostfix(string s) 
 {
  
@@ -51,15 +74,17 @@ string infixToPostfix(string s)
     return result;
 }
 
-string ineval(string post)
+int ineval(string post)
 {
-	stack<string> opStack, opeStack;
+	stack<int> opStack, opeStack;
 
-	for(i = 0; post[i]; i++)
+	for(int i = 0; i < post.length(); i++)
 	{
 		if(!isOperator(post[i])) opStack.push(post[i] - '0');
 		else opeStack.push(post[i]);
 	}
+
+
 
 	while(!opeStack.empty())
 	{
@@ -90,6 +115,11 @@ string ineval(string post)
 			opStack.push(x/y);
 			opeStack.pop();
 		}
+        else if(opeStack.top() == '^')
+        {
+            opStack.push((int)pow(x, y));
+            opeStack.pop();
+        }
 	}
 
 	return opStack.top();
@@ -99,9 +129,9 @@ string ineval(string post)
 
 int main() 
 {
-    string exp = "1+2*(3^4-5)^(4+3*2)-i";
+    string exp = "1+2*(3^4-5)^(4+3*2)-1";
     string post = infixToPostfix(exp);
-    ineval(post);
+    printf("%d\n", ineval(post));
     return 0;
 }
 

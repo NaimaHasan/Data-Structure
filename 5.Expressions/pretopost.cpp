@@ -34,7 +34,7 @@ string prefixToPostfix(string exp)
 
 int main()
 {
-    string exp = "*-A/BC-/AKL";
+    string exp = "+1-*2^-^345+4*321";
 
     printf("%s\n", prefixToPostfix(exp).c_str());
     return 0;
