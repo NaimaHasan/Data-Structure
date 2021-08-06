@@ -1,87 +1,72 @@
-#include <stdio.h>
-#include <stdlib.h>
+#include<bits/stdc++.h>
+using namespace std;
 
-struct node {
-    char val;
-    node* left;
-    node* right;
-
+struct node
+{
+    int data;
+    node *left, *right;
     node()
     {
         left=NULL;
         right=NULL;
     }
 
-    node(char _val)
+    node(int _data)
     {
-        val=_val;
+        data=_data;
         left=NULL;
         right=NULL;
     }
 };
+ 
+int preIndex = 0;
 
-struct bt
+int search(int arr[], int low, int high, int value)
 {
-    node *root;
+    int i;
+    for (i=low; i<=high; i++) 
+        if (arr[i] == value)
+            return i;
+    
+    return i;
+}
 
-    bt()
-    {
-        root=NULL;
-    }
+node *buildTree(int in[], int pre[], int low, int high)
+{
+    if (low > high) return NULL;
 
-    int search(char arr[], int strt, int end, char value)
-    {
-        for (int i = strt; i <= end; i++) 
-        {
-            if (arr[i] == value)
-                return i;
-        }
-    }
+    node *cur = new node(pre[preIndex++]);
+    
+    if (low == high) return cur;
 
-    node* buildTree(char in[], char pre[], int st, int ed)
-    {
-        node *cur = root;
-        int preIndex = 0;
-     
-        if (st > ed)
-            return NULL;
+    int inIndex = search(in, low, high, cur->data);
 
-        cur = new node(pre[preIndex++]);
-     
-        if (st == ed)
-            return cur;
-     
-        
-        int inIndex = search(in, st, ed, cur->val);
-     
-        cur->left = buildTree(in, pre, st, inIndex - 1);
-        cur->right = buildTree(in, pre, inIndex + 1, ed);
-     
-        return cur;
-    }
+    cur->left = buildTree(in, pre, low, inIndex - 1);
+    cur->right = buildTree(in, pre, inIndex + 1, high);
+
+    return cur;
+}
+
+void printInorder(node *root) 
+{
+    node *cur=root;
+
+    if(cur == NULL) return;
+
+    printInorder(cur->left);
+    printf("%d ", cur->data);
+    printInorder(cur->right);
+}
 
 
-    void inorder(node *root) 
-    {
-        node *cur=root;
-
-        if(cur == NULL) return;
-
-        inorder(cur->left);
-        printf("%d ", cur->val);
-        inorder(cur->right);
-    }
-};
 int main()
 {
-    char in[] = { 'D', 'B', 'E', 'A', 'F', 'C' };
-    char pre[] = { 'A', 'B', 'D', 'E', 'C', 'F' };
+    int inorder[1000],preorder[1000],n,i;
+    
+    scanf("%d",&n);
+    for(i=0; i<n; i++) scanf("%d", &inorder[i]);
+    for(i=0; i<n; i++) scanf("%d", &preorder[i]);
 
-    int len = sizeof(in) / sizeof(in[0]);
-
-    bt k;
-
-    node *tmp = k.buildTree(in, pre, 0, len - 1);
-    k.inorder(tmp);
-    getchar();
+    node *root = buildTree(inorder, preorder, 0, n-1);
+    printInorder(root);
 }
