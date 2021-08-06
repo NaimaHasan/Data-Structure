@@ -1,65 +1,45 @@
 #include<bits/stdc++.h>
 using namespace std;
 
-bool isOperator(char ch){
-    return (ch == '(' || ch == ')' || ch == '+' || ch == '-' || ch == '*' || ch == '/' || ch == '^');
-}
-
-int posteval(string post)
+double evaluatePostfix(string exp)
 {
-	stack<int> opStack, opeStack;
-
-	for(int i = 0; i < post.length(); i++)
-	{
-		if(!isOperator(post[i])) opStack.push(post[i] - '0');
-		else opeStack.push(post[i]);
-	}
-
-	while(!opeStack.empty())
-	{
-		int x, y;
-
-		x = opStack.top();
-		opStack.pop();
-		y = opStack.top();
-		opStack.pop();
-
-		if(opeStack.top() == '+')
-		{
-			opStack.push(x+y);
-			opeStack.pop();
-		}
-		else if(opeStack.top() == '-')
-		{
-			opStack.push(x-y);
-			opeStack.pop();
-		}
-		else if(opeStack.top() == '*')
-		{
-			opStack.push(x*y);
-			opeStack.pop();
-		}
-		else if(opeStack.top() == '/')
-		{
-			opStack.push(x/y);
-			opeStack.pop();
-		}
-        else if(opeStack.top() == '^')
-        {
-            opStack.push((int)pow(x, y));
-            opeStack.pop();
-        }
-	}
-
-	return opStack.top();
-}
+    stack<double> s;
+    int i;
  
+    for (i = 0; exp[i]; i++)
+    {
+        if(isdigit(exp[i])) s.push(exp[i] - '0');
+		else
+        {
+            double o1 = s.top();
+            s.pop();
+            double o2 = s.top();
+            s.pop();
 
-int main() 
+            switch(exp[i]) 
+            {
+                case '+':
+                    s.push(o1 + o2);
+                    break;
+                case '-':
+                    s.push(o1 - o2);
+                    break;
+                case '*':
+                    s.push(o1 * o2);
+                    break;
+                case '/':
+                    s.push(o1 / o2);
+                    break;
+            }
+        }
+    }
+    return s.top();
+}
+
+int main()
 {
-    string exp = "1234^5-432*+^*+1-";
-    printf("%d\n", posteval(exp));
+    char exp[] = "231*+9-";
+    printf("%lf\n",evaluatePostfix(exp));
     return 0;
 }
-
 

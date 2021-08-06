@@ -12,32 +12,8 @@ int prec(char c)
     else return -1;
 }
 
-bool isOperator(char ch){
-    return (ch == '(' || ch == ')' || ch == '+' || ch == '-' || ch == '*' || ch == '/' || ch == '^');
-}
-
-void traverse_stack(stack<int> & st) {
-    if(st.empty())
-        return;
-    int x = st.top();
-    printf("%d ", x);
-    st.pop();
-    traverse_stack(st);
-    st.push(x);
-}
-void traverse_stackx(stack<int> & st) {
-    if(st.empty())
-        return;
-    int x = st.top();
-    printf("%c ", x);
-    st.pop();
-    traverse_stackx(st);
-    st.push(x);
-}
-
 string infixToPostfix(string s) 
 {
- 
     stack<char> st; 
     string result;
     s = '(' + s + ')';
@@ -73,66 +49,46 @@ string infixToPostfix(string s)
     }
     return result;
 }
-
-int ineval(string post)
-{
-	stack<int> opStack, opeStack;
-
-	for(int i = 0; i < post.length(); i++)
-	{
-		if(!isOperator(post[i])) opStack.push(post[i] - '0');
-		else opeStack.push(post[i]);
-	}
-
-
-
-	while(!opeStack.empty())
-	{
-		int x, y;
-
-		x = opStack.top();
-		opStack.pop();
-		y = opStack.top();
-		opStack.pop();
-
-		if(opeStack.top() == '+')
-		{
-			opStack.push(x+y);
-			opeStack.pop();
-		}
-		else if(opeStack.top() == '-')
-		{
-			opStack.push(x-y);
-			opeStack.pop();
-		}
-		else if(opeStack.top() == '*')
-		{
-			opStack.push(x*y);
-			opeStack.pop();
-		}
-		else if(opeStack.top() == '/')
-		{
-			opStack.push(x/y);
-			opeStack.pop();
-		}
-        else if(opeStack.top() == '^')
-        {
-            opStack.push((int)pow(x, y));
-            opeStack.pop();
-        }
-	}
-
-	return opStack.top();
-}
-
  
+double evaluatePostfix(string exp)
+{
+    stack<double> s;
+    int i;
+ 
+    for (i = 0; exp[i]; i++)
+    {
+        if(isdigit(exp[i])) s.push(exp[i] - '0');
+        else
+        {
+            double o1 = s.top();
+            s.pop();
+            double o2 = s.top();
+            s.pop();
+
+            switch(exp[i]) 
+            {
+                case '+':
+                    s.push(o1 + o2);
+                    break;
+                case '-':
+                    s.push(o1 - o2);
+                    break;
+                case '*':
+                    s.push(o1 * o2);
+                    break;
+                case '/':
+                    s.push(o1 / o2);
+                    break;
+            }
+        }
+    }
+    return s.top();
+}
 
 int main() 
 {
-    string exp = "1+2*(3^4-5)^(4+3*2)-1";
+    string exp = "1+2*(3+4-5)-1";
     string post = infixToPostfix(exp);
-    printf("%d\n", ineval(post));
+    printf("%lf\n",evaluatePostfix(post));
     return 0;
 }
-
-

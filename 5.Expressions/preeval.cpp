@@ -1,92 +1,45 @@
-#include<bits/stdc++.h>
+#include <bits/stdc++.h>
 using namespace std;
 
-bool isOperator(char ch){
-    return (ch == '(' || ch == ')' || ch == '+' || ch == '-' || ch == '*' || ch == '/' || ch == '^');
-}
-
-string prefixToPostfix(string exp)
+double evaluatePrefix(string exp)
 {
+    stack<double> s;
  
-    stack<string> s;
-    
-    for (int i=exp.size()-1;exp[i]; i--)
+    for(int i = exp.size() - 1; i >= 0; i--) 
     {
-        if (isOperator(exp[i]))
+        if(isdigit(exp[i])) s.push(exp[i] - '0');
+        else 
         {
-            
-            string op1 = s.top();
-            s.pop();
-            string op2 = s.top();
-            s.pop();
  
-            string temp = op1 + op2 + exp[i];
-            s.push(temp);
-        }
- 
-        else s.push(string(1,exp[i]));
-    }
+            double o1 = s.top();
+            s.pop();
+            double o2 = s.top();
+            s.pop();
 
+            switch(exp[i]) 
+            {
+                case '+':
+                    s.push(o1 + o2);
+                    break;
+                case '-':
+                    s.push(o1 - o2);
+                    break;
+                case '*':
+                    s.push(o1 * o2);
+                    break;
+                case '/':
+                    s.push(o1 / o2);
+                    break;
+            }
+        }
+    }
+ 
     return s.top();
 }
 
-int preeval(string post)
+int main()
 {
-	stack<int> opStack, opeStack;
-
-	for(int i = 0; i < post.length(); i++)
-	{
-		if(!isOperator(post[i])) opStack.push(post[i] - '0');
-		else opeStack.push(post[i]);
-	}
-
-	while(!opeStack.empty())
-	{
-		int x, y;
-
-		x = opStack.top();
-		opStack.pop();
-		y = opStack.top();
-		opStack.pop();
-
-		if(opeStack.top() == '+')
-		{
-			opStack.push(x+y);
-			opeStack.pop();
-		}
-		else if(opeStack.top() == '-')
-		{
-			opStack.push(x-y);
-			opeStack.pop();
-		}
-		else if(opeStack.top() == '*')
-		{
-			opStack.push(x*y);
-			opeStack.pop();
-		}
-		else if(opeStack.top() == '/')
-		{
-			opStack.push(x/y);
-			opeStack.pop();
-		}
-        else if(opeStack.top() == '^')
-        {
-            opStack.push((int)pow(x, y));
-            opeStack.pop();
-        }
-	}
-
-	return opStack.top();
-}
- 
-
-int main() 
-{
-    string exp = "+1-*2^-^345+4*321";
-    exp = prefixToPostfix(exp);
-    printf("%s\n", exp.c_str());
-    printf("%d\n", preeval(exp));
+    string exp = "+9*26";
+    printf("%lf\n",evaluatePrefix(exp));
     return 0;
 }
-
-

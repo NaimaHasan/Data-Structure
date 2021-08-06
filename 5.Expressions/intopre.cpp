@@ -78,7 +78,7 @@ string infixToPrefix(string infix)
 
 int main()
 {
-    string s = ("x+y*z/w+u");
+    string s = ("1+2*(3^4-5)^(4+3*2)-1");
 
     printf("%s\n", infixToPrefix(s).c_str());
     return 0;
