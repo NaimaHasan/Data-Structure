@@ -23,15 +23,15 @@ struct compare {
     }
 };
 
-void printCodes(struct MinHeapNode* root, string str) {
+void generateCodes(struct MinHeapNode* root, string str) {
     if (!root)
         return;
 
     if (root->data != 0)
         codes.insert(pair<char, string>(root->data, str));
 
-    printCodes(root->left, str + "0");
-    printCodes(root->right, str + "1");
+    generateCodes(root->left, str + "0");
+    generateCodes(root->right, str + "1");
 }
 
 MinHeapNode* HuffmanCodes(map<char, int> freq)
@@ -59,7 +59,7 @@ MinHeapNode* HuffmanCodes(map<char, int> freq)
         minHeap.push(top);
     }
 
-    printCodes(minHeap.top(), "");
+    generateCodes(minHeap.top(), "");
 
     return minHeap.top();
 }

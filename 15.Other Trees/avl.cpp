@@ -88,10 +88,12 @@ struct AVLTree
         
         /* 3. Get the balance factor of this ancestor node*/
         int balance = getBalance(cur);
- 
+    
+        // outside case
         if (balance > 1 && key < cur->left->key) return rightRotate(cur);
         if (balance < -1 && key > cur->right->key) return leftRotate(cur);
  
+        //inside case
         // Left Right Case
         if (balance > 1 && key > cur->left->key) 
         {
