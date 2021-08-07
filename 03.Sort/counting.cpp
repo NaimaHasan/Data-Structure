@@ -33,3 +33,5 @@ int main(){
 
 	return 0;
 }
+
+// Stable: Yes

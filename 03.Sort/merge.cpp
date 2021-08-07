@@ -83,3 +83,5 @@ int main()
 //Loop invariant: At the start of each iteration k of the for loop, 
 //the nonempty part of 'a' contains the k − l smallest elements of L and R, in sorted order. 
 //Moreover, L[i] and R[j] are the smallest elements of their arrays that have not been copied to 'a'
+
+// Stable: Yes

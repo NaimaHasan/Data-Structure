@@ -54,3 +54,5 @@ int main()
 //1. Pivot element is placed at its correct position.
 //2. Elements less than pivot element lie on the left side of pivot element.
 //3. Elements greater than pivot element lie on the right side of pivot element.
+
+// Stable: NO

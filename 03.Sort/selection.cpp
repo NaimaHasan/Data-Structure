@@ -40,3 +40,5 @@ int main()
 //there are two loop invariant condition:
 //1. In the outer loop, array is sorted for first i elements.
 //2. In the inner loop, min is always the minimum value in A[i to j].
+
+// Stable: No

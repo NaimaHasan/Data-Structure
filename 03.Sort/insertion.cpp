@@ -28,3 +28,5 @@ int main()
 //if the element is bigger then loop breaks. Then inserts the selected element to next spot
 
 // loop invariant condition is that the subarray a[0 to i-1] is always sorted.
+
+// Stable: Yes

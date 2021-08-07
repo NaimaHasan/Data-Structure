@@ -24,3 +24,5 @@ int main()
 
 
 //so the loop invariant condition is that at the end of i iteration right most i elements are sorted and in place
+
+// Stable: Yes
