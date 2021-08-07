@@ -42,9 +42,31 @@ struct DSU{
 
 int main()
 {
-	int n, m, u, v, fl = 0;
+	int n, m, u, v;
 	DSU dsu;
 
-	scanf("%d",&n);
+	scanf("%d", &n);
 	dsu.init(n);
+
+	scanf("%d", &m);
+	while(m--){
+		scanf("%d %d", &u, &v);
+		dsu.union_nodes(u, v);
+	}
+
+	// set<int> st;
+	// for(int i = 1; i <=n; i++){
+	// 	st.insert(dsu.find_root(i));
+	// }
+	// printf("%d\n", st.size());
+
+	int count = 0;
+
+	for(int i = 1; i <= n; i++){
+		if(i == dsu.find_root(i)) count++;
+	}
+
+	printf("%d\n", count);
+
+	return 0;
 }

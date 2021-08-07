@@ -42,9 +42,22 @@ struct DSU{
 
 int main()
 {
-	int n, m, u, v, fl = 0;
+	int n, m, u, v, fl = 1;
 	DSU dsu;
 
-	scanf("%d",&n);
+	scanf("%d", &n);
 	dsu.init(n);
+
+	scanf("%d", &m);
+	while(m--){
+		scanf("%d %d", &u, &v);
+		if(dsu.isConnected(u, v))
+			fl = 0;
+		dsu.union_nodes(u, v);
+	}
+
+	if(fl) printf("No cycle");
+	else printf("Cycle");
+
+	return 0;
 }

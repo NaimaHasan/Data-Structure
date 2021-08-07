@@ -42,9 +42,25 @@ struct DSU{
 
 int main()
 {
-	int n, m, u, v, fl = 0;
+	int n, m, u, v, q;
 	DSU dsu;
 
-	scanf("%d",&n);
+	scanf("%d", &n);
 	dsu.init(n);
+
+	scanf("%d", &m);
+	while(m--){
+		scanf("%d %d", &u, &v);
+		dsu.union_nodes(u, v);
+	}
+
+	scanf("%d", &q);
+	while(q--){
+		scanf("%d %d", &u, &v);
+		if(dsu.isConnected(u, v))
+			printf("Connected\n");
+		else printf("Not connected\n");
+	}
+
+	return 0;
 }
