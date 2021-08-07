@@ -51,8 +51,8 @@ void mergesort(int a[],int l,int r)
     { 
         int m=l+(r-l)/2; 
   
-        mergeSort(a,l,m); 
-        mergeSort(a,m+1,r); 
+        mergesort(a,l,m); 
+        mergesort(a,m+1,r); 
   
         merge(a,l,m,r); 
     }
@@ -64,8 +64,9 @@ int main()
 	scanf("%d",&n);
 	for(i=0;i<n;i++) scanf("%d",&a[i]);
     
-    mergeSort(a,0,n-1); 
+    mergesort(a,0,n-1); 
 
+    for(i=0;i<n;i++) printf("%d\n", a[i]);
 }
 
 
