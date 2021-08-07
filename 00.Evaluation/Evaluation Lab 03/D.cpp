@@ -1,9 +1,5 @@
-//15
-//15
-//15
-//15
-//15
-//15
+//infix evaluation
+
 #include <bits/stdc++.h>
 
 using namespace std;

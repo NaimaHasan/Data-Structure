@@ -1,14 +1,19 @@
+//Given the three points of a triangle, you will have to find another point which is equidistance from all the other points. 
+
 #include <bits/stdc++.h>
 
-struct point{
+struct point
+{
 	double x, y;
 };
 
-double distance(point a, point b){
+double distance(point a, point b)
+{
 	return sqrt( ((a.x-b.x)*(a.x-b.x)) + ((a.y-b.y)*(a.y-b.y)) );
 }
 
-double sum(point a, point vertices[]){
+double sum(point a, point vertices[])
+{
 	double ans = 0;
 
 	for(int i = 0; i < 3; i++)
@@ -28,7 +33,8 @@ int main(){
 
 	minX = v[0].x; minY = v[0].y; maxX = v[0].x; maxY = v[0].y;
 
-	for(i = 0; i < 3; i++){
+	for(i = 0; i < 3; i++)
+	{
 		if(v[i].x < minX)
 			minX = v[i].x;
 
@@ -53,15 +59,18 @@ int main(){
 
 		// printf("values of sums are %lf %lf\n\n", sum(mid1, v), sum(mid2, v));
 
-		if(sum(mid1, v) < sum(mid2, v)){
+		if(sum(mid1, v) < sum(mid2, v))
+		{
 			maxX = mid2.x;
 			maxY = mid2.y;
 		}
-		else if(sum(mid1, v) > sum(mid2, v)){
+		else if(sum(mid1, v) > sum(mid2, v))
+		{
 			minX = mid1.x;
 			minY = mid2.y;
 		}
-		else{
+		else
+		{
 			minX = mid1.x;
 			minY = mid2.y;
 			maxX = mid2.x;

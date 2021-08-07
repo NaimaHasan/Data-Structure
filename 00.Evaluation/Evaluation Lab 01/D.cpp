@@ -1,27 +1,27 @@
-//15
-//15
-#include <bits/stdc++.h>
+//find the number of distinct values in the array.
 
-int main(){
+#include <bits/stdc++.h>
+using namespace std;
+
+int main()
+{
 	long long int n, array[100005], i, count = 0, check;
 
 	scanf("%lld", &n);
 
-	for(i = 0; i < n; i++)
-		scanf("%lld", &array[i]);
+	for(i = 0; i < n; i++) scanf("%lld", &array[i]);
 
-	std::sort(array, array+n);
+	sort(array, array+n);
 
 	check = array[0];
 	count++;
 
 	for(i = 1; i < n; i++)
-		if(array[i] != check){
+		if(array[i] != check)
+		{
 			check = array[i];
 			count++;
 		}
-
 	printf("%lld\n", count);
-
 	return 0;
 }

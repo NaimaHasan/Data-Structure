@@ -1,3 +1,10 @@
+// In this problem, you are given a list of numbers L. After that there will be some queries:
+
+// I X: means you need to insert the number X in the list.
+// U X: means you need to find how many numbers greater than X are on the list L.
+// L X: means you need to find how many numbers less than or equal to X are on the list L.
+
+
 #include <bits/stdc++.h>
 using namespace std;
 struct node

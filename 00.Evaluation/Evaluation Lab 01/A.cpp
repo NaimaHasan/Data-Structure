@@ -1,27 +1,25 @@
+//In this problem, you need to count the number of vowels in an input string. 
+
 #include <stdio.h>
 
-void vowelCount(char str[], int index, int * count){
-	if( !str[index] ) return;	
-	char c = str[index];
-
-	if( c=='a'||c =='e'||c=='i'||c=='o'||c=='u')
-		*count += 1;
-	if( c=='A'||c =='E'||c=='I'||c=='O'||c=='U')
-                *count += 1;
-	vowelCount(str, index+1, count);
+int vowelCount(char str[], int index, int count)
+{
+	if( !str[index] ) return count;	
 	
-	return;
+	char c = str[index];
+	
+	if( c=='a'||c =='e'||c=='i'||c=='o'||c=='u') count++;
+	if( c=='A'||c =='E'||c=='I'||c=='O'||c=='U') count++;
+                
+	count = vowelCount(str, index+1, count);
+	
+	return count;
 }
 
 int main(){
 	char str[205];
-	int count = 0;
-
 	fgets(str, 205, stdin);
-
-	vowelCount( str, 0, &count);
-
-	printf("%d\n", count);
-
+	int c = vowelCount( str, 0, 0);
+	printf("%d\n", c);
 	return 0;	
 }

@@ -1,3 +1,14 @@
+// Design a double linked list with the following methods:
+// print()
+// node *search(int K)
+// insertFirst(int data)
+// insertLast(int data)
+// insertBefore(int k, int data)
+// deleteFirst(int data)
+// deleteLast(int data)
+// deleteBefore(int k)
+// reverse()
+
 #include<bits/stdc++.h>
 using namespace std;
 struct node{

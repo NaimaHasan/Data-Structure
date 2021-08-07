@@ -1,3 +1,13 @@
+// Design a singly linked list (on top of the given code) with the following methods:
+
+// insertBefore(int k, int data): inserts a new node before the node with value k. 
+// 	If there is no node in the linked list, then it simply returns.
+
+// deleteBefore(int k): deletes the node before the node with value k. 
+// 	If there is no such node in the linked list, then it simply returns.
+
+// reverse(): reverses the linked list.
+
 #include<bits/stdc++.h>
 using namespace std;
 struct node{

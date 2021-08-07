@@ -1,16 +1,15 @@
-//15
-//15
-//15
+//Given two same size matrices find its summation using recursion.
 #include <stdio.h>
 
-void printSum( int A[][101], int B[][101], int row, int col, int i, int j ){
-	if(j == col){
-		if(i == row - 1)
-			return;
+void printSum( int A[][101], int B[][101], int row, int col, int i, int j )
+{
+	if(j == col)
+	{
+		if(i == row-1) return;
 		printSum(A, B, row, col, i + 1, 0);
 		return;
 	}
-	printf("%d%s", A[i][j] + B[i][j], j == col-1?"\n":" ");
+	printf("%d%s", A[i][j]+B[i][j], j == col-1?"\n":" ");
 	printSum(A, B, row, col, i, j + 1);
 }
 
