@@ -54,7 +54,7 @@ void infixToPostfix(string s)
 
 int main() 
 {
-    string exp = "a+b*(c^d-e)^(f+g*h)-i";
+    string exp = "3−5∗7∗(a−5∗(3/8)∗7+3∗b)";
     infixToPostfix(exp);
     return 0;
 }
